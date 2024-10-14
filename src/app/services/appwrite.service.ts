@@ -18,7 +18,7 @@ export class AppwriteService {
     this.databases = new Databases(this.client);
   }
 
-  // Register a new user
+
   async registerUser(email: string, password: string, name: string) {
     try {
       const userId = ID.unique();
@@ -31,7 +31,7 @@ export class AppwriteService {
     }
   }
 
-  // Log in the user with retries
+ 
   async loginUser(email: string, password: string): Promise<any> {
     let retries = 3;
     let delay = 5000;
@@ -62,7 +62,7 @@ export class AppwriteService {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  // Update the user's name
+
   async updateUserName(name: string) {
     try {
       const updatedUser = await this.account.updateName(name);
@@ -74,7 +74,7 @@ export class AppwriteService {
     }
   }
 
-  // Logout the user
+
   async logoutUser() {
     try {
       await this.account.deleteSession('current');
@@ -85,12 +85,12 @@ export class AppwriteService {
     }
   }
 
-  // Create an event
+
   async createEvent(title: string, description: string, date: string) {
     try {
       const event = await this.databases.createDocument(
-        AppwriteConfig.databaseID,   // Use database ID from config
-        AppwriteConfig.collectionID, // Use collection ID from config
+        AppwriteConfig.databaseID,   
+        AppwriteConfig.collectionID, 
         ID.unique(),
         { title, description, date }
       );
@@ -106,8 +106,8 @@ export class AppwriteService {
   async listEvents() {
     try {
       const events = await this.databases.listDocuments(
-        AppwriteConfig.databaseID,   // Use database ID from config
-        AppwriteConfig.collectionID  // Use collection ID from config
+        AppwriteConfig.databaseID,   
+        AppwriteConfig.collectionID  
       );
       console.log('Events List:', events);
       return events;
@@ -121,8 +121,8 @@ export class AppwriteService {
   async deleteEvent(eventId: string) {
     try {
       await this.databases.deleteDocument(
-        AppwriteConfig.databaseID,   // Use database ID from config
-        AppwriteConfig.collectionID, // Use collection ID from config
+        AppwriteConfig.databaseID,  
+        AppwriteConfig.collectionID, 
         eventId
       );
       console.log('Event Deleted');
@@ -136,8 +136,8 @@ export class AppwriteService {
   async updateEvent(eventId: string, title: string, description: string, date: string) {
     try {
       const updatedEvent = await this.databases.updateDocument(
-        AppwriteConfig.databaseID,   // Use database ID from config
-        AppwriteConfig.collectionID, // Use collection ID from config
+        AppwriteConfig.databaseID,   
+        AppwriteConfig.collectionID, 
         eventId,
         { title, description, date }
       );
@@ -149,15 +149,14 @@ export class AppwriteService {
     }
   }
 
-  // Register for an event (for simplicity)
   async registerForEvent(eventId: string) {
     console.log('User registered for event with ID:', eventId);
   }
 }
-// appwrite.config.ts
+
 export const AppwriteConfig = {
   endpoint: 'https://cloud.appwrite.io/v1',
   projectID: '670914d1001aca1df178',
-  databaseID: '670914d1001aca1devent', // Use the correct database ID
-  collectionID: '670b4849002af2f73c4b' // Use the correct collection ID
+  databaseID: '670914d1001aca1devent', 
+  collectionID: '670b4849002af2f73c4b' 
 };
