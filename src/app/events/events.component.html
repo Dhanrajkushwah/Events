@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <!-- Event Creation Form -->
+  <form (ngSubmit)="createOrUpdateEvent()" class="event-form">
+    <h2>{{ isEditMode ? 'Update Event' : 'Create Event' }}</h2>
+    <input type="text" placeholder="Title" [(ngModel)]="title" name="title" required>
+    <textarea placeholder="Description" [(ngModel)]="description" name="description" required></textarea>
+    <input type="date" [(ngModel)]="date" name="date" required>
+    <button type="submit">{{ isEditMode ? 'Update Event' : 'Create Event' }}</button>
+  </form>
+
+  <!-- Event List Table -->
+  <h2>Browse Events</h2>
+  <table class="event-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>{{ event.title }}</td>
+        <td>{{ event.description }}</td>
+        <td>{{ event.date | date }}</td>
+        <td>
+          <button class="table-btn" (click)="registerForEvent(event)" #tooltip="matTooltip"
+          matTooltip="Register Event"
+          > <i class="fa fa-sign-in-alt"></i></button> &nbsp;
+          <button class="table-btn" (click)="editEvent(event)" #tooltip="matTooltip"
+          matTooltip="Edit Event"
+          > <i class="fa fa-edit"></i></button> &nbsp;
+          <button class="table-btn delete-btn" (click)="deleteEvent(event.$id)"  #tooltip="matTooltip"
+          matTooltip="Delete Event"
+         >  <i class="fa fa-trash"></i> </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

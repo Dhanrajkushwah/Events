@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button  class="hide-large">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span >Event Management</span>
+  <span class="spacer"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="accountMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <!-- Dropdown Menu -->
+  <mat-menu #accountMenu="matMenu">
+    <button mat-menu-item (click)="onSignIn()">
+      <mat-icon>login</mat-icon>
+      <span>Sign In</span>
+    </button>
+    <button mat-menu-item (click)="onSignUp()">
+      <mat-icon>person_add</mat-icon>
+      <span>Sign Up</span>
+    </button>
+    <button mat-menu-item (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button mat-menu-item (click)="onSettings()">
+      <mat-icon>settings</mat-icon>
+      <span>Settings</span>
+    </button>
+    <button mat-menu-item (click)="onThemes()">
+      <mat-icon>palette</mat-icon>
+      <span>Themes</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<router-outlet></router-outlet>

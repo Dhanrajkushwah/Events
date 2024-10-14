@@ -1,0 +1,17 @@
+<div class="auth-form">
+  <h2 *ngIf="isLogin">Login</h2>
+  <h2 *ngIf="!isLogin">Register</h2>
+  <form (ngSubmit)="onSubmit()">
+    <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+    <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+    <br>
+    <div *ngIf="!isLogin">
+      <input type="text" placeholder="Full Name" [(ngModel)]="name" name="name" required>
+    </div>
+    <br>
+    <button type="submit">{{ isLogin ? 'Login' : 'Register' }}</button>
+  </form>
+  <a href="#" (click)="toggleForm($event)" class="toggle-link">
+    {{ isLogin ? "Don't have an account? Register" : "Already have an account? Login" }}
+  </a>
+</div>
